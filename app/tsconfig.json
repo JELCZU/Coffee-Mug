@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* Base Options */
+    "esModuleInterop": true, //smoothes interupts
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "rootDir": "src",
+    /* Srickness */
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    /* Transplancing Typescript */
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "exclude": ["dist", "node_modules"]
+}
