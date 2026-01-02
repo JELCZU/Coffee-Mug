@@ -1,21 +1,26 @@
-export default {
+import type { Config } from "jest";
+
+const config: Config = {
   preset: "ts-jest/presets/default-esm",
+
   testEnvironment: "node",
 
-  globals: {
-    "ts-jest": {
-      useESM: true,
-      tsconfig: "tsconfig.jest.json",
-    },
-  },
-
-  // ⬇️ mówi Jestowi, że .ts to ESM
   extensionsToTreatAsEsm: [".ts"],
 
-  // ⬇️ NAPRAWIA importy z .js → .ts
-  moduleNameMapper: {
-    "^(\\.{1,2}/.*)\\.js$": "$1", // mapuje importy lokalne .js → .ts
+  transform: {
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        useESM: true,
+      },
+    ],
   },
 
-  testMatch: ["**/tests/**/*.test.ts"],
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+  },
+
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 };
+
+export default config;

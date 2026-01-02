@@ -5,23 +5,23 @@ import { postCreateProductHandler } from "./commands/postCreateProduct.handler.j
 
 const router = express.Router();
 
-router.get("/products", async (req, res) => {
+router.get("/products", async (req, res, next) => {
   try {
     const products = await getProductsHandler();
-    console.log(products);
     res.json(products);
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    console.log(err);
+    next(err); // ← kluczowe!
   }
 });
 router.post("/products", async (req, res) => {
-  // createProductValidator;
-  // const product = await postCreateProductHandler(req);
-  // if (product) {
-  //   res.status(201);
-  // } else {
-  //   res.status(500).json({ error: "Server error" });
-  // }
+  createProductValidator;
+  const product = await postCreateProductHandler(req);
+  if (product) {
+    res.status(201);
+  } else {
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 export default router;

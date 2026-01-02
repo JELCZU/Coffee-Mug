@@ -1,23 +1,22 @@
 {
   "compilerOptions": {
-    /* Base Options */
-    "esModuleInterop": true, //smoothes interupts
-    "skipLibCheck": true,
     "target": "ES2022",
-    "verbatimModuleSyntax": true,
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
     "rootDir": "src",
-    /* Srickness */
+    "outDir": "dist",
+    "sourceMap": true,
+
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
 
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    /* Transplancing Typescript */
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
-    "outDir": "dist",
-    "sourceMap": true
+    "skipLibCheck": true,
+
+    "isolatedModules": true,
+    "esModuleInterop": true
   },
   "exclude": ["dist", "node_modules"]
 }

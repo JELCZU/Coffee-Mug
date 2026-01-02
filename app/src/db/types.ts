@@ -21,6 +21,6 @@ export interface Order {
   createdAt: string;
 }
 export interface DatabaseSchema {
-  products: Product[];
-  orders: Order[];
+  products?: Product[];
+  orders?: Order[];
 }
