@@ -60,7 +60,6 @@ describe("POST /api/products – Integration tests", () => {
 
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty("errors");
-    console.log(response.body);
     expect(Array.isArray(response.body.errors)).toBe(true);
 
     await db.read();
