@@ -1,3 +1,3 @@
-export interface RestockProductDTO {
+export interface PostRestockProductDTO {
   count: number;
 }

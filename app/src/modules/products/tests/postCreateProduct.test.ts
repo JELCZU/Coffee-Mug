@@ -1,28 +1,18 @@
 import request from "supertest";
-import app from "../../../app.js";
 import db from "../../../db/db.js";
-import { jest } from "@jest/globals";
 
-describe("POST /api/products – Integration tests", () => {
-  beforeAll(async () => {
-    await db.read();
-  });
-
+describe("POST /api/products", () => {
   beforeEach(async () => {
-    await db.read();
     db.data = {
       products: [],
       orders: [],
     };
+
     await db.write();
-    await new Promise((r) => setTimeout(r, 50)); // hack
   });
 
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it("should return 201 and create product when data is valid", async () => {
+  test("should return 201 and create product when data is valid", async () => {
+    const { default: app } = await import("../../../app.js");
     const payload = {
       name: "Car 3",
       description: "Car 3",
@@ -43,11 +33,15 @@ describe("POST /api/products – Integration tests", () => {
     });
 
     await db.read();
-    expect(db.data!.products.length).toBe(1);
-    expect(db.data!.products[0]?.name).toBe("Car 3");
+
+    expect(db.data!.products).toHaveLength(1);
+    expect(db.data!.products[0]).toMatchObject({
+      name: "Car 3",
+    });
   });
 
-  it("should return 400 when validation fails", async () => {
+  test("should return 400 when validation fails", async () => {
+    const { default: app } = await import("../../../app.js");
     const invalidPayload = {
       name: "",
       price: -10,
@@ -63,6 +57,6 @@ describe("POST /api/products – Integration tests", () => {
     expect(Array.isArray(response.body.errors)).toBe(true);
 
     await db.read();
-    expect(db.data!.products.length).toBe(0);
+    expect(db.data!.products).toHaveLength(0);
   });
 });

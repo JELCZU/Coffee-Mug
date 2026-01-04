@@ -1,6 +1,5 @@
 // src/modules/products/tests/restockProduct.integration.test.ts
 import request from "supertest";
-import app from "../../../app.js";
 import db from "../../../db/db.js";
 import { jest } from "@jest/globals";
 
@@ -26,7 +25,8 @@ describe("POST /api/products/:id/restock – Integration tests", () => {
     jest.restoreAllMocks();
   });
 
-  it("should return 200 and increase product stock", async () => {
+  test("should return 200 and increase product stock", async () => {
+    const { default: app } = await import("../../../app.js");
     const response = await request(app)
       .post("/api/products/1/restock")
       .send({ count: 10 });
@@ -38,7 +38,8 @@ describe("POST /api/products/:id/restock – Integration tests", () => {
     expect(db.data!.products[0]?.stock).toBe(15);
   });
 
-  it("should return 400 when stock is invalid", async () => {
+  test("should return 400 when stock is invalid", async () => {
+    const { default: app } = await import("../../../app.js");
     const response = await request(app)
       .post("/api/products/1/restock")
       .send({ count: -5 });
@@ -47,14 +48,15 @@ describe("POST /api/products/:id/restock – Integration tests", () => {
     expect(response.body).toHaveProperty("errors");
 
     await db.read();
-    expect(db.data!.products[0]?.stock).toBe(5); // brak zmian
+    expect(db.data!.products[0]?.stock).toBe(5);
   });
 
-  it("should return 404 when product does not exist", async () => {
+  test("should return 404 when product does not exist", async () => {
+    const { default: app } = await import("../../../app.js");
     const response = await request(app)
       .post("/api/products/999/restock")
       .send({ count: 5 });
 
-    expect(response.status).toBe(500); // lub 404 jeśli obsłużysz błąd jawnie
+    expect(response.status).toBe(404);
   });
 });

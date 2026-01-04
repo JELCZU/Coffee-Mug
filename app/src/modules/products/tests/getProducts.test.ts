@@ -13,20 +13,8 @@ describe("GET /api/products - Integration tests", () => {
     db.data = {
       orders: [],
       products: [
-        {
-          id: "1",
-          name: "Car 1",
-          description: "Car 1",
-          price: 25,
-          stock: 10,
-        },
-        {
-          id: "2",
-          name: "Car 2",
-          description: "Car 2",
-          price: 35,
-          stock: 20,
-        },
+        { id: "1", name: "Car 1", description: "Car 1", price: 25, stock: 10 },
+        { id: "2", name: "Car 2", description: "Car 2", price: 35, stock: 20 },
       ],
     };
     await db.write();
@@ -36,15 +24,18 @@ describe("GET /api/products - Integration tests", () => {
     jest.restoreAllMocks();
   });
 
-  it("should return 200 and list of products", async () => {
+  test("should return 200 and list of products", async () => {
+    const { default: app } = await import("../../../app.js");
     const response = await request(app).get("/api/products");
     expect(response.status).toBe(200);
     expect(response.body.products.length).toBe(2);
   });
 
-  it("should return 200 and empty array when no products", async () => {
+  test("should return 200 and empty array when no products", async () => {
     db.data = { products: [], orders: [] };
     await db.write();
+
+    const { default: app } = await import("../../../app.js");
 
     const response = await request(app).get("/api/products");
     expect(response.status).toBe(200);
