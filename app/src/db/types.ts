@@ -6,6 +6,11 @@ export interface Product {
   stock: number;
   category?: string;
 }
+export interface Customer {
+  id: string;
+  location: "US" | "EU" | "ASIA";
+}
+
 export interface OrderProduct {
   productId: string;
   count: number;
@@ -15,12 +20,18 @@ export interface OrderProduct {
 export interface Order {
   id: string;
   customerId: string;
-  products: OrderProduct[];
+  products: {
+    productId: string;
+    count: number;
+    unitPrice: number;
+  }[];
   total: number;
   discountApplied?: string;
   createdAt: string;
 }
+
 export interface DatabaseSchema {
   products: Product[];
   orders: Order[];
+  customers: Customer[];
 }

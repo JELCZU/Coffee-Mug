@@ -18,7 +18,7 @@ export const postCreateProductHandler = async (
     category: category,
   };
 
-  // Dodanie do bazy
+  //Dodanie do bazy
   if (db.data!.products) {
     db.data!.products.push(newProduct);
   } else {

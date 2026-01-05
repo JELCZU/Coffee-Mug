@@ -1,4 +1,3 @@
-// src/modules/products/tests/sellProduct.integration.test.ts
 import request from "supertest";
 import db from "../../../db/db.js";
 import { jest } from "@jest/globals";
@@ -6,6 +5,7 @@ import { jest } from "@jest/globals";
 describe("POST /api/products/:id/sell", () => {
   beforeEach(async () => {
     db.data = {
+      customers: [],
       products: [
         {
           id: "1",

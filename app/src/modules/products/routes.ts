@@ -1,6 +1,6 @@
 import express from "express";
 import { getProductsHandler } from "./queries/getProducts.handler.js";
-import { createProductValidator } from "./validators/createProduct.validator.js";
+import { createProductValidator } from "./validators/postCreateProduct.validator.js";
 import { postCreateProductHandler } from "./commands/postCreateProduct.handler.js";
 import { postRestockProductHandler } from "./commands/postRestockProduct.handler.js";
 import { postSellValidator } from "./validators/postSellProduct.validator.js";

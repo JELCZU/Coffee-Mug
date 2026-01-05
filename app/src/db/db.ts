@@ -8,6 +8,6 @@ const db = new Low<DatabaseSchema>(adapter, {} as DatabaseSchema);
 export async function initDb() {
   await db.read();
 }
-db.data ||= { products: [], orders: [] };
+db.data ||= { products: [], orders: [], customers: [] };
 
 export default db;

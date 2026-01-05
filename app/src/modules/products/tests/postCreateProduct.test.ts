@@ -4,6 +4,7 @@ import db from "../../../db/db.js";
 describe("POST /api/products", () => {
   beforeEach(async () => {
     db.data = {
+      customers: [],
       products: [],
       orders: [],
     };

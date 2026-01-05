@@ -4,7 +4,7 @@ import db from "../../../db/db.js";
 import { getProductsHandler } from "../queries/getProducts.handler.js";
 import { jest } from "@jest/globals";
 
-describe("GET /api/products - Integration tests", () => {
+describe("GET /api/products", () => {
   beforeAll(async () => {
     await db.read();
   });
@@ -12,6 +12,7 @@ describe("GET /api/products - Integration tests", () => {
   beforeEach(async () => {
     db.data = {
       orders: [],
+      customers: [],
       products: [
         { id: "1", name: "Car 1", description: "Car 1", price: 25, stock: 10 },
         { id: "2", name: "Car 2", description: "Car 2", price: 35, stock: 20 },
@@ -32,7 +33,11 @@ describe("GET /api/products - Integration tests", () => {
   });
 
   test("should return 200 and empty array when no products", async () => {
-    db.data = { products: [], orders: [] };
+    db.data = {
+      customers: [],
+      products: [],
+      orders: [],
+    };
     await db.write();
 
     const { default: app } = await import("../../../app.js");
